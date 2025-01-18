@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+</head>
+<body>
+    <h1>All Quotes</h1>
+    <ul>
+        {% for quote in quotes %}
+            <li>
+                "{{ quote.text }}" - <a href="{% url 'author_detail' quote.author.id %}">{{ quote.author.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_quote' %}">Add a New Quote</a>
+        <a href="{% url 'add_author' %}">Add a New Author</a>
+    {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to add quotes or authors.</p>
+    {% endif %}
+</body>
+</html>
